@@ -40,7 +40,8 @@ function TodoItem({ task, onToggle, onDelete, onEdit, isDarkTheme }) {
       borderBottom: `1px solid ${isDarkTheme ? '#3a3a5a' : '#eee'}`,
       backgroundColor: isDarkTheme ? '#2a2a4a' : 'transparent',
       borderRadius: '4px',
-      marginBottom: '5px'
+      marginBottom: '5px',
+      transition: 'background-color 0.3s ease'
     }}>
       <input
         type="checkbox"

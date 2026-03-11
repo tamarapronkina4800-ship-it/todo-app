@@ -24,9 +24,15 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  // Сохраняем тему в localStorage
+  // Сохраняем тему в localStorage и применяем к body
   useEffect(() => {
     localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+    
+    // Применяем тему ко всему body
+    document.body.style.backgroundColor = isDarkTheme ? '#1a1a2e' : '#f5f5f5';
+    document.body.style.margin = '0';
+    document.body.style.minHeight = '100vh';
+    document.body.style.transition = 'background-color 0.3s ease';
   }, [isDarkTheme]);
 
   // Добавление новой задачи
@@ -74,11 +80,12 @@ function App() {
   const activeCount = todos.filter(todo => !todo.completed).length;
 
   // Стили в зависимости от темы
-  const themeStyles = {
-    backgroundColor: isDarkTheme ? '#1a1a2e' : '#f5f5f5',
-    color: isDarkTheme ? '#eee' : '#333',
-    minHeight: '100vh',
-    transition: 'all 0.3s ease'
+  const containerStyles = {
+    maxWidth: '600px',
+    margin: '0 auto',
+    padding: '20px',
+    fontFamily: 'Arial, sans-serif',
+    color: isDarkTheme ? '#eee' : '#333'
   };
 
   const headerStyles = {
@@ -95,17 +102,12 @@ function App() {
     borderRadius: '4px',
     cursor: 'pointer',
     marginBottom: '20px',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.3s ease',
+    fontSize: '14px'
   };
 
   return (
-    <div style={{
-      ...themeStyles,
-      maxWidth: '600px',
-      margin: '0 auto',
-      padding: '20px',
-      fontFamily: 'Arial, sans-serif'
-    }}>
+    <div style={containerStyles}>
       <h1 style={headerStyles}>Менеджер задач</h1>
 
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>

@@ -6,7 +6,8 @@ function TodoFilters({ filter, onFilterChange, activeCount, isDarkTheme }) {
       alignItems: 'center',
       marginBottom: '20px',
       paddingBottom: '10px',
-      borderBottom: `2px solid ${isDarkTheme ? '#3a3a5a' : '#eee'}`
+      borderBottom: `2px solid ${isDarkTheme ? '#3a3a5a' : '#eee'}`,
+      transition: 'border-color 0.3s ease'
     }}>
       <span style={{ color: isDarkTheme ? '#eee' : '#333' }}>
         Осталось задач: {activeCount}
@@ -23,7 +24,8 @@ function TodoFilters({ filter, onFilterChange, activeCount, isDarkTheme }) {
               color: filter === filterType ? 'white' : (isDarkTheme ? '#eee' : '#333'),
               border: 'none',
               borderRadius: '4px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
             }}
           >
             {filterType === 'all' ? 'Все' : 
@@ -35,4 +37,4 @@ function TodoFilters({ filter, onFilterChange, activeCount, isDarkTheme }) {
   );
 }
 
-export default TodoFilters;
+export default TodoFilters;ы

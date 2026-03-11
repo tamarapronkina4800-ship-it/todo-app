@@ -25,7 +25,8 @@ function AddTodoForm({ onAdd, isDarkTheme }) {
           borderRadius: '4px',
           border: '1px solid #ddd',
           backgroundColor: isDarkTheme ? '#2a2a4a' : '#fff',
-          color: isDarkTheme ? '#eee' : '#333'
+          color: isDarkTheme ? '#eee' : '#333',
+          transition: 'background-color 0.3s ease'
         }}
       />
       <button

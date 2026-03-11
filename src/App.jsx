@@ -4,38 +4,29 @@ import TodoFilters from './components/TodoFilters';
 import TodoItem from './components/TodoItem';
 
 function App() {
-  // Состояние для списка задач
   const [todos, setTodos] = useState(() => {
     const saved = localStorage.getItem('todos');
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Состояние для текущего фильтра
   const [filter, setFilter] = useState('all');
 
-  // Состояние для темы
   const [isDarkTheme, setIsDarkTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme === 'dark';
   });
 
-  // Сохраняем задачи в localStorage
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
-  // Сохраняем тему в localStorage и применяем к body
   useEffect(() => {
     localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
-    
-    // Применяем тему ко всему body
     document.body.style.backgroundColor = isDarkTheme ? '#1a1a2e' : '#f5f5f5';
     document.body.style.margin = '0';
     document.body.style.minHeight = '100vh';
-    document.body.style.transition = 'background-color 0.3s ease';
   }, [isDarkTheme]);
 
-  // Добавление новой задачи
   const addTodo = (text) => {
     const newTodo = {
       id: Date.now(),
@@ -45,73 +36,59 @@ function App() {
     setTodos([...todos, newTodo]);
   };
 
-  // Переключение статуса задачи
   const toggleTodo = (id) => {
     setTodos(todos.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     ));
   };
 
-  // Удаление задачи
   const deleteTodo = (id) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
-  // Редактирование задачи
   const editTodo = (id, newText) => {
     setTodos(todos.map(todo =>
       todo.id === id ? { ...todo, text: newText } : todo
     ));
   };
 
-  // Переключение темы
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
 
-  // Фильтрация задач
   const filteredTodos = todos.filter(todo => {
     if (filter === 'active') return !todo.completed;
     if (filter === 'completed') return todo.completed;
-    return true; // 'all'
+    return true;
   });
 
-  // Подсчет активных задач
   const activeCount = todos.filter(todo => !todo.completed).length;
 
-  // Стили в зависимости от темы
-  const containerStyles = {
-    maxWidth: '600px',
-    margin: '0 auto',
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif',
-    color: isDarkTheme ? '#eee' : '#333'
-  };
-
-  const headerStyles = {
-    textAlign: 'center',
-    color: isDarkTheme ? '#eee' : '#333',
-    marginBottom: '20px'
-  };
-
-  const buttonThemeStyles = {
-    padding: '8px 16px',
-    background: isDarkTheme ? '#ffd700' : '#333',
-    color: isDarkTheme ? '#333' : '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    marginBottom: '20px',
-    transition: 'all 0.3s ease',
-    fontSize: '14px'
-  };
-
   return (
-    <div style={containerStyles}>
-      <h1 style={headerStyles}>Менеджер задач</h1>
+    <div style={{
+      maxWidth: '600px',
+      margin: '0 auto',
+      padding: '20px',
+      fontFamily: 'Arial, sans-serif',
+      color: isDarkTheme ? '#eee' : '#333',
+      minHeight: '100vh'
+    }}>
+      <h1 style={{ textAlign: 'center', color: isDarkTheme ? '#eee' : '#333' }}>
+        Менеджер задач
+      </h1>
 
       <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-        <button onClick={toggleTheme} style={buttonThemeStyles}>
+        <button 
+          onClick={toggleTheme} 
+          style={{
+            padding: '8px 16px',
+            background: isDarkTheme ? '#ffd700' : '#333',
+            color: isDarkTheme ? '#333' : '#fff',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer'
+          }}
+        >
           {isDarkTheme ? '☀️ Светлая тема' : '🌙 Тёмная тема'}
         </button>
       </div>
@@ -128,7 +105,7 @@ function App() {
       {filteredTodos.length === 0 ? (
         <p style={{ textAlign: 'center', color: '#999' }}>
           {filter === 'all' ? 'Задач пока нет' :
-            filter === 'active' ? 'Нет активных задач' : 'Нет выполненных задач'}
+           filter === 'active' ? 'Нет активных задач' : 'Нет выполненных задач'}
         </p>
       ) : (
         <ul style={{ listStyle: 'none', padding: 0 }}>

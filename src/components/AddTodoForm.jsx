@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function AddTodoForm({ onAdd, isDarkTheme }) {
+function AddTodoForm({ onAdd, isDark }) {
   const [text, setText] = useState('');
 
   const handleSubmit = (e) => {
@@ -24,9 +24,8 @@ function AddTodoForm({ onAdd, isDarkTheme }) {
           marginRight: '10px',
           borderRadius: '4px',
           border: '1px solid #ddd',
-          backgroundColor: isDarkTheme ? '#2a2a4a' : '#fff',
-          color: isDarkTheme ? '#eee' : '#333',
-          transition: 'background-color 0.3s ease'
+          backgroundColor: isDark ? '#2a2a4a' : '#fff',
+          color: isDark ? '#eee' : '#333'
         }}
       />
       <button

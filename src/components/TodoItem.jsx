@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function TodoItem({ task, onToggle, onDelete, onEdit, isDarkTheme }) {
+function TodoItem({ task, onToggle, onDelete, onEdit, isDark }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(task.text);
 
@@ -37,11 +37,10 @@ function TodoItem({ task, onToggle, onDelete, onEdit, isDarkTheme }) {
       alignItems: 'center',
       gap: '10px',
       padding: '8px',
-      borderBottom: `1px solid ${isDarkTheme ? '#3a3a5a' : '#eee'}`,
-      backgroundColor: isDarkTheme ? '#2a2a4a' : 'transparent',
+      borderBottom: `1px solid ${isDark ? '#3a3a5a' : '#eee'}`,
+      backgroundColor: isDark ? '#2a2a4a' : 'transparent',
       borderRadius: '4px',
-      marginBottom: '5px',
-      transition: 'background-color 0.3s ease'
+      marginBottom: '5px'
     }}>
       <input
         type="checkbox"
@@ -63,8 +62,8 @@ function TodoItem({ task, onToggle, onDelete, onEdit, isDarkTheme }) {
             fontSize: '16px',
             border: '1px solid #007bff',
             borderRadius: '4px',
-            backgroundColor: isDarkTheme ? '#1a1a2e' : '#fff',
-            color: isDarkTheme ? '#eee' : '#333'
+            backgroundColor: isDark ? '#1a1a2e' : '#fff',
+            color: isDark ? '#eee' : '#333'
           }}
         />
       ) : (
@@ -73,7 +72,7 @@ function TodoItem({ task, onToggle, onDelete, onEdit, isDarkTheme }) {
           style={{
             flex: 1,
             textDecoration: task.completed ? 'line-through' : 'none',
-            color: task.completed ? '#999' : (isDarkTheme ? '#eee' : '#333'),
+            color: task.completed ? '#999' : (isDark ? '#eee' : '#333'),
             cursor: 'pointer',
             padding: '4px',
             borderRadius: '4px'
@@ -101,4 +100,4 @@ function TodoItem({ task, onToggle, onDelete, onEdit, isDarkTheme }) {
   );
 }
 
-export default TodoItem;
+export default TodoItem
